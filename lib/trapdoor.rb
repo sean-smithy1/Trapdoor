@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << '.'
+DATABASE_DIR=Dir.home() + '/.trapdoor'
+
 require 'sqlite3'
-require 'character'
-require 'setup'
-require 'validates'
-require 'random_gen'
+require_relative 'trapdoor/character'
+require_relative 'trapdoor/setup'
+require_relative 'trapdoor/validates'
+require_relative 'trapdoor/random_gen'
 
 module Trapdoor
+
+  system('clear') || system('cls')
 
   puts "Welcome to TRAPDOOR an online MUD"
 
@@ -29,4 +32,3 @@ module Trapdoor
       puts "See Yah"
   end
 end
-

@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 require 'sqlite3'
+DATABASE_DIR=Dir.home() + '/.trapdoor'
 
-db=SQLite3::Database.new( "trapdoor.sqlite" )
+Dir.mkdir(DATABASE_DIR) unless Dir.exists?(DATABASE_DIR)
+
+db=SQLite3::Database.new( "#{DATABASE_DIR}/trapdoor.sqlite3" )
 
 # Create tables
 sql = <<SQL

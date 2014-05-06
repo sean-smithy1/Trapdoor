@@ -1,5 +1,8 @@
 module Setup
   def self.character
+
+    system('clear') || system('cls')
+
     puts "Welcome to the game, you need to create a character to continue"
     puts "You are able to select a name, a race and a profession"
     puts "your outher abilities will be randomally generated."
@@ -15,7 +18,7 @@ module Setup
       puts "Ok #{name}, now choose a race: "
       puts "The following racess are available, your choice will affect your abilities"
       puts "1. Human, 2. Elf, 3. Ding-A-Ling"
-      print "1, 2, or 3:"
+      print "1, 2, or 3: "
       race = gets.chomp
     end
 
