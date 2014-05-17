@@ -1,4 +1,4 @@
-module Validates
+Class Validates
 
   def self.menu_input?(input)
     /^[NSQ]$/.match(input)
@@ -13,7 +13,7 @@ module Validates
   end
 
   def self.ok?(yn)
-    /^[yn]$/i.match(yn)
+    /^[y]$/i.match(yn)
   end
 
 end

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+VERSION = '0.0.1'
 DATABASE_DIR=Dir.home() + '/.trapdoor'
 
 require 'sqlite3'
@@ -9,6 +10,7 @@ require_relative 'trapdoor/validates'
 require_relative 'trapdoor/random_gen'
 
 module Trapdoor
+  # Open DB globally
 
   system('clear') || system('cls')
 
@@ -30,5 +32,6 @@ module Trapdoor
  #     Play.new(char)
     when input == "Q"
       puts "See Yah"
+      DB.close()
   end
 end
