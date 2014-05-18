@@ -8,10 +8,9 @@ require_relative 'trapdoor/character'
 require_relative 'trapdoor/setup'
 require_relative 'trapdoor/validates'
 require_relative 'trapdoor/random_gen'
+require_relative 'trapdoor/database'
 
 module Trapdoor
-  # Open DB globally
-
   system('clear') || system('cls')
 
   puts "Welcome to TRAPDOOR an online MUD"
@@ -24,8 +23,9 @@ module Trapdoor
 
   case
     when input == "N"
-      char=Setup.character
- #     Play.new(char)
+      char=Setup.new
+      player=char.create_character
+ #   Play.new(player)
     when input == "S"
 
       char=Authenticate.user(login)

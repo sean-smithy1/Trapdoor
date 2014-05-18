@@ -1,25 +1,28 @@
 class Database
 
-  def initalize
+require 'sqlite3'
+DATABASE_DIR=Dir.home() + '/.trapdoor'
+
+
+  def initialize
     @db=SQLite3::Database.new( "#{DATABASE_DIR}/trapdoor.sqlite3" )
   end
 
 
-  def write_player(obj)
+  def write(obj)
     table=obj.class.to_s.downcase
     fields=obj.instance_variables.map { |var| var[1..-1] }.join(", ")
-    values=obj.instance_variables.map { |var| obj.instance_variable_get(var) }.join(", ")
+    num_fields=obj.instance_variables.count
+    bind_values=obj.instance_variables.map { |var| obj.instance_variable_get(var) }
 
-    @db.execute("INSERT INTO #{tabe}, (#{fields})
-                        VALUES (#{values})"
+    @db.execute("INSERT INTO #{table} (#{fields}) VALUES (#{(['?'] * num_fields).join(', ')})",  bind_values)
   end
 
-  def self.read()
+  def read(id, obj)
 
   end
 
   def self.update()
 
   end
-
 end

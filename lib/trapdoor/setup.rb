@@ -1,8 +1,13 @@
-module Setup
-  def self.character
+class Setup
 
-    valid=Validates.new
-    player=Player.new
+  def initialize
+    @db=Database.new
+  end
+
+  def create_character
+    args = { }
+    stats=Player.stats
+    yn='n'
 
     system('clear') || system('cls')
 
@@ -10,40 +15,43 @@ module Setup
     puts "You are able to select a name, a race and a profession"
     puts "your outher abilities will be randomally generated."
 
-    until valid.name?(player.name)
+    until Validates.name?(args[:name])
       print "What name would you like to go by? "
-      player.name = gets.chomp
+      args[:name] = gets.chomp
     end
 
-    until valid.entry?(player.race)
-      print "Ok #{name}, now choose a race:\nThe following racess are available, your choice will affect your abilities\n1. Human, 2. Elf, 3. Ding-A-Ling (1,2,or3): "
-      player.race = gets.chomp
+    until Validates.entry?(args[:race])
+      print "Ok #{args[:name]}, now choose a race:\nThe following racess are available, your choice will affect your abilities\n1. Human, 2. Elf, 3. Ding-A-Ling (1,2,or3): "
+      args[:race] = gets.chomp
     end
 
-    until valid.entry?(player.prof)
-      puts "Ok #{name}, now choose a profession: "
+    until Validates.entry?(args[:prof])
+      puts "Ok #{args[:name]}, now choose a profession: "
       puts "The following professions are available, your choice will affect your abilities"
       print "1. Mage, 2. Warrior, 3. Ranger (1,2,or 3): "
-      player.prof = gets.chomp
+      args[:prof] = gets.chomp
     end
 
-    until valid.ok?(yn)
-      puts "Ok #{name} Below are the generated stats for this character."
+    until Validates.ok?(yn)
+      puts "Ok #{args[:name]} Below are the generated stats for this character."
 
       stats.each { |k,v|
-        v=RandomGen.char_stat
-        printf("%-10s: %2d\n", k,v)
+        s=RandomGen.char_stat
+        k[v]=s
+        printf("%-10s: %2d\n", k,k[v])
       }
-      stats.merge!(fullhp: RandomGen.hitpoints(stats[:con])) "",
-      printf("%-10s: %2d\n", "hp:", stats[:hp])
 
+      args[:fullhp]=RandomGen.hitpoints(stats[:con])
+      printf("%-10s: %2d\n", "hp:", args[:fullhp])
       puts "\n"
       print "Is this OK? (YN):"
       yn=gets.chomp
     end
 
-    Database.write(player)
-
-
+    args.merge!stats
+    player=Player.new(args)
+    @db.write(player)
+    return player
   end
+
 end

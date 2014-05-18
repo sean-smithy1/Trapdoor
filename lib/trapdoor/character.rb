@@ -1,14 +1,10 @@
 class Character
 
-attr_reader :level, :type, :race, :prof, :fullhp
-attr_accessor :currenthp
+  attr_reader :level, :race, :prof, :fullhp
+  attr_accessor :currenthp
 
   def initialize (args={})
-#    args.each { |k, v| self.send "#{k}=", v }
-    @race=args[:race]
-    @title=args[:title]
-    @prof=args[:prof]
-    @fullhp=args[:fullhp]
+    args.each { |k, v| eval "@#{k}=v" }
     post_init(args)
   end
 
@@ -45,16 +41,17 @@ attr_accessor :currenthp
     #int required. (Most monsters are too stupid)
   end
 
+  def self.stats
+    { str: 0, int: 0, wis: 0, dex: 0, con: 0, chr: 0, fullhp: 0 }
+  end
 end
 
 class Player < Character
-  attr_reader :login, :stats, :name
+  attr_reader :login, :name
 
   def post_init(args)
       @login=args[:login]
-      @stats = args[:stats]
       @name = args[:name]
-      @type='player'
   end
 
   def attack_strength()
@@ -75,7 +72,7 @@ end
 class Monster < Character
 
   def post_init(args)
-    @type='monster'
+
   end
 
   def attack_strength()
@@ -95,7 +92,6 @@ class NPC < Character
     @login=args[:login]
     @stats = args[:stats]
     @name = args[:name]
-    @type='NPC'
   end
 
   def attack_strength()

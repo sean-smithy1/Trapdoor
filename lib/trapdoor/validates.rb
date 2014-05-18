@@ -1,4 +1,4 @@
-Class Validates
+module Validates
 
   def self.menu_input?(input)
     /^[NSQ]$/.match(input)

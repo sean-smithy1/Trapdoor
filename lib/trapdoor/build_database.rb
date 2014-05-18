@@ -8,7 +8,7 @@ db=SQLite3::Database.new( "#{DATABASE_DIR}/trapdoor.sqlite3" )
 
 # Create tables
 sql = <<SQL
-    CREATE TABLE IF NOT EXISTS player(id INTEGER PRIMARY KEY ASC, login, name , race, prof, full_hp, current_hp, str, int, wis, dex, con, chr, story_id, map_id);
+    CREATE TABLE IF NOT EXISTS player(id INTEGER PRIMARY KEY ASC, login, name , race, prof, fullhp, current_hp, str, int, wis, dex, con, chr, story_id, map_id);
     CREATE TABLE IF NOT EXISTS monster(id INTEGER PRIMARY KEY ASC, name , race, prof, full_hp, current_hp, story_id, map_id);
     CREATE TABLE IF NOT EXISTS npc(id INTEGER PRIMARY KEY ASC, name, race, prof, full_hp, current_hp, str, int, wis, dex, con, chr, story_id, map_id);
     CREATE TABLE IF NOT EXISTS items(id INTEGER PRIMARY KEY ASC, type, description);
