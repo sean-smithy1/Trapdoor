@@ -8,9 +8,9 @@ db=SQLite3::Database.new( "#{DATABASE_DIR}/trapdoor.sqlite3" )
 
 # Create tables
 sql = <<SQL
-    CREATE TABLE IF NOT EXISTS player(id INTEGER PRIMARY KEY ASC, login, name , race, prof, fullhp, current_hp, str, int, wis, dex, con, chr, story_id, map_id);
-    CREATE TABLE IF NOT EXISTS monster(id INTEGER PRIMARY KEY ASC, name , race, prof, full_hp, current_hp, story_id, map_id);
-    CREATE TABLE IF NOT EXISTS npc(id INTEGER PRIMARY KEY ASC, name, race, prof, full_hp, current_hp, str, int, wis, dex, con, chr, story_id, map_id);
+    CREATE TABLE IF NOT EXISTS player(id INTEGER PRIMARY KEY ASC, name TEXT, password TEXT, race TEXT, prof TEXT, fullhp INTEGER, level INTEGER, current_hp INTEGER, str INTEGER, int INTEGER, wis INTEGER, dex INTEGER, con INTEGER, chr INTEGER, story_id, map_id);
+    CREATE TABLE IF NOT EXISTS monster(id INTEGER PRIMARY KEY ASC, race TEXT, prof TEXT, fullhp INTEGER, level INTEGER, current_hp INTEGER, str INTEGER, int INTEGER, wis INTEGER, dex INTEGER, con INTEGER, chr INTEGER, story_id, map_id);
+    CREATE TABLE IF NOT EXISTS npc(id INTEGER PRIMARY KEY ASC, name TEXT, race TEXT, prof TEXT, fullhp INTEGER, level INTEGER, current_hp INTEGER, str INTEGER, int INTEGER, wis INTEGER, dex INTEGER, con INTEGER, chr INTEGER, story_id, map_id);
     CREATE TABLE IF NOT EXISTS items(id INTEGER PRIMARY KEY ASC, type, description);
     CREATE TABLE IF NOT EXISTS char_inv(id INTEGER PRIMARY KEY ASC, char_id INT, inv_id INT);
     CREATE TABLE IF NOT EXISTS story(id INTEGER PRIMARY KEY ASC,description);

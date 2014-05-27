@@ -1,4 +1,7 @@
+
 class Setup
+include ScreenInterface
+# include RandomGen
 
   def initialize
     @db=Database.new
@@ -20,6 +23,10 @@ class Setup
       args[:name] = gets.chomp
     end
 
+    #until Validates.password?(args[:password])
+      args[:password]=ask_for_password
+    #end
+
     until Validates.entry?(args[:race])
       print "Ok #{args[:name]}, now choose a race:\nThe following racess are available, your choice will affect your abilities\n1. Human, 2. Elf, 3. Ding-A-Ling (1,2,or3): "
       args[:race] = gets.chomp
@@ -35,16 +42,16 @@ class Setup
     until Validates.ok?(yn)
       puts "Ok #{args[:name]} Below are the generated stats for this character."
 
-      stats.each { |k,v|
-        s=RandomGen.char_stat
-        k[v]=s
-        printf("%-10s: %2d\n", k,k[v])
+      stats.each_key { |k|
+        stats[k]=RandomGen.char_stat
+        printf("%-10s: %2d\n", k, stats[k])
       }
 
       args[:fullhp]=RandomGen.hitpoints(stats[:con])
+      args[:level]=1
       printf("%-10s: %2d\n", "hp:", args[:fullhp])
       puts "\n"
-      print "Is this OK? (YN):"
+      print "Try again? (YN):"
       yn=gets.chomp
     end
 

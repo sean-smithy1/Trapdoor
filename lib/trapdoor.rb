@@ -4,11 +4,15 @@ VERSION = '0.0.1'
 DATABASE_DIR=Dir.home() + '/.trapdoor'
 
 require 'sqlite3'
+require 'bcrypt'
 require_relative 'trapdoor/character'
+require_relative 'trapdoor/screen_interface'
+require_relative 'trapdoor/random_gen'
 require_relative 'trapdoor/setup'
 require_relative 'trapdoor/validates'
-require_relative 'trapdoor/random_gen'
 require_relative 'trapdoor/database'
+
+# require_relative 'trapdoor/play'
 
 module Trapdoor
   system('clear') || system('cls')
@@ -25,13 +29,14 @@ module Trapdoor
     when input == "N"
       char=Setup.new
       player=char.create_character
- #   Play.new(player)
+      Game.new( { player: player } )
     when input == "S"
-
       char=Authenticate.user(login)
- #     Play.new(char)
+      if char
+
+      end
+      Game.new( { player: player } )
     when input == "Q"
       puts "See Yah"
-      DB.close()
   end
 end

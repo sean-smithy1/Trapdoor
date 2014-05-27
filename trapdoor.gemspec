@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'http://rubygems.org/gems/trapdoor'
   spec.license       = 'MIT'
   spec.add_runtime_dependency 'sqlite3', '~>1.3.9'
+  spec.add_runtime_dependency 'bcrypt', '~>3.1.7'
   spec.add_development_dependency 'rspec', '~> 2.14.1'
   spec.require_paths = ["lib"]
 end

@@ -1,5 +1,7 @@
 class Character
 
+  #include Validates
+
   attr_reader :level, :race, :prof, :fullhp
   attr_accessor :currenthp
 
@@ -81,8 +83,7 @@ class Monster < Character
   end
 
   def inventory
-    "A Dog"
-    #randomly generate inventory
+    #build from factory
   end
 
 class NPC < Character

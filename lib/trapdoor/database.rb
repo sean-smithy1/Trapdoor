@@ -18,11 +18,16 @@ DATABASE_DIR=Dir.home() + '/.trapdoor'
     @db.execute("INSERT INTO #{table} (#{fields}) VALUES (#{(['?'] * num_fields).join(', ')})",  bind_values)
   end
 
-  def read(id, obj)
+  def load(id)
 
   end
 
-  def self.update()
+  def update()
 
   end
+
+  def get_pw(name)
+    @db.execute("SELECT password FROM player WHERE name = #{name}")
+  end
+
 end

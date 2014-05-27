@@ -16,4 +16,8 @@ module Validates
     /^[y]$/i.match(yn)
   end
 
+  def self.password?(password)
+    true if password.length > 6
+  end
+
 end
